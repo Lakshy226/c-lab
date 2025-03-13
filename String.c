@@ -8,8 +8,8 @@ int main ()
     int length;
 
     printf("Enter the length of the string:");
-    scanf("%d",&length);
-
+    scanf("%d", &length);
+while(getchar()!= '\n');
     str = (char*)malloc((length+1) * sizeof(char));
 
     if(str == NULL){
