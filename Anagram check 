@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>  // For tolower function
+
+// Function to sort a string (Bubble Sort)
+void sortString(char str[]) {
+    int n = strlen(str);
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (str[j] > str[j + 1]) {
+                char temp = str[j];
+                str[j] = str[j + 1];
+                str[j + 1] = temp;
+            }
+        }
+    }
+}
+
+// Function to remove spaces and convert to lowercase
+void cleanString(char str[]) {
+    int i, j = 0;
+    for (i = 0; str[i] != '\0'; i++) {
+        if (str[i] != ' ') { 
+            str[j++] = tolower(str[i]);
+        }
+    }
+    str[j] = '\0';
+}
+
+int main() {
+    char str1[100], str2[100];
+
+    printf("Enter first string: ");
+    fgets(str1, sizeof(str1), stdin);
+    printf("Enter second string: ");
+    fgets(str2, sizeof(str2), stdin);
+
+    // Remove newline character from fgets
+    str1[strcspn(str1, "\n")] = '\0';
+    str2[strcspn(str2, "\n")] = '\0';
+
+    cleanString(str1);
+    cleanString(str2);
+
+    // If lengths are different, not an anagram
+    if (strlen(str1) != strlen(str2)) {
+        printf("Not an anagram.\n");
+        return 0;
+    }
+
+    sortString(str1);
+    sortString(str2);
+
+    if (strcmp(str1, str2) == 0) {
+        printf("The strings are anagrams.\n");
+    } else {
+        printf("Not an anagram.\n");
+    }
+
+    return 0;
+}
